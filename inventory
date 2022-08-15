@@ -1,5 +1,8 @@
-serverD1 ansible_hosts = 192.168.11.20
-serverD2 ansible_hosts = 192.168.11.21
+server01@192.168.11.20
+server02@192.168.11.21
+
+#serverD1 ansible_hosts =server01@192.168.11.20
+#serverD2 ansible_hosts = 192.168.11.21
 #serverD3 ansible_hosts = 192.168.11.22
 
 

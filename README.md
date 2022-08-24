@@ -34,7 +34,7 @@ this is use to pratice ansible, DevOps and other more for intern I4
 
 - go to .bachrc on JS to add path for JAVA and MAVEN
  
-//nano .bashrc
+#nano .bashrc
   
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 M2_HOME=/opt/apache-maven-3.8.6
@@ -46,13 +46,14 @@ PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
 #PATH=$PATH:$JAVA_HOME:$HOME/bin
 export PATH
 
-//source .bashrc   #restart .bashrc
-
-//echo $PATH   #view PATH
+- source .bashrc  
+- echo $PATH   
 
 ### tomcat
 - go to TS and add some line on /opt/apache-tomcat-8.5.82/conf/tomcat-users.xml
-  //ps -ef | grep tomcat-
+
+
+ #ps -ef | grep tomcat-
 
   <role rolename="manager-gui"/>
   <role rolename="manager-script"/>
@@ -63,7 +64,7 @@ export PATH
   <user username="tomcat" password="s3cret" roles="manager-gui"/>
 
 - and go to 
-  //find / -name context.xml
+  #find / -name context.xml
 
        - /opt/apache-tomcat/host-manager/META-INF/context.xml
        - /opt/apache-tomcat/manager/META-INF/context.xml
@@ -81,19 +82,21 @@ export PATH
 
 - create shortcut for tomcat up and down
    
-   ln -s /opt/apache-tomcat-8.5.82/bin/startup.sh /usr/local/bin/tomcatup
-   ln -s /opt/apache-tomcat-8.5.82/bin/shutdown.sh /usr/local/bin/tomcatdown
+  - ln -s /opt/apache-tomcat-8.5.82/bin/startup.sh /usr/local/bin/tomcatup
+  - ln -s /opt/apache-tomcat-8.5.82/bin/shutdown.sh /usr/local/bin/tomcatdown
    
 - down and up tomcat server
    
-  tomcatdown
-  tomcatup
+  - tomcatdown
+  - tomcatup
 
 - open tomcat server on browser 
 
 <TS_IP_ADDRESS:8080(defult)>
 
-click manager app to login user: username= tomcat, pwd: s3cret
+click manager app to login user:
+  - username= tomcat
+  - pwd: s3cret
 
 
 

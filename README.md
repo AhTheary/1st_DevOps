@@ -64,10 +64,11 @@ export PATH
   <user username="tomcat" password="s3cret" roles="manager-gui"/>
 
 - and go to 
-  #find / -name context.xml
+  
+       find / -name context.xml
 
-       - /opt/apache-tomcat/host-manager/META-INF/context.xml
-       - /opt/apache-tomcat/manager/META-INF/context.xml
+       nano /opt/apache-tomcat/host-manager/META-INF/context.xml
+       nano /opt/apache-tomcat/manager/META-INF/context.xml
   
   comment(#) on 
 

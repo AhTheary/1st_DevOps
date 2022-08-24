@@ -1,0 +1,24 @@
+---
+
+- hosts: theary
+  become: true
+  tasks:
+
+  - name: create theary user
+    user:
+      name: theary
+      groups: root
+
+  - name: add ssh key for theary
+    authorized_key:
+      user: theary
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEfp5mwLeTniqFQvSPgpkDnn20/y/eYXaE5/A7L/m6Vk ansible"
+
+  - name: add sudoers file for theary
+    tags: always
+    copy:
+      src: sudoer_theary
+      dest: /etc/sudoers.d/theary
+      owner: root
+      group: root 
+      mode: 0644

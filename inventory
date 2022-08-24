@@ -1,6 +1,14 @@
-server01@192.168.11.20
+server03@192.168.11.22
 server02@192.168.11.21
+[maven]
+server04@192.168.11.23
+server03@192.168.11.22
 
+[theary]
+server04@192.168.11.23
+
+[web_server]
+server03@192.168.11.22
 #serverD1 ansible_hosts =server01@192.168.11.20
 #serverD2 ansible_hosts = 192.168.11.21
 #serverD3 ansible_hosts = 192.168.11.22

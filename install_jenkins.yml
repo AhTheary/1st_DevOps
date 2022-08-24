@@ -28,6 +28,15 @@
       name: openjdk-11-jdk
       state: present
 
+#  - name: set java
+#    lineinfile:
+#      dest: ~/.bashrc
+#      line: ^ 
+#           "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+#            export PATH=${PATH}:${JAVA_HOME}/bin"
+#      owner: root
+#    become_user: root
+
   - name: Install jenkins
     apt:
       name: jenkins
@@ -38,4 +47,10 @@
       name: jenkins
       enabled: true
       state: started
+
+#  - name: install maven
+#    apt:
+#      name: maven
+#      state: present
+#      echo: "mvn -version"
 

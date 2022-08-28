@@ -1,0 +1,10 @@
+---
+# vars file for web_server
+
+# tomcat vars
+tomcat: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.82/bin/apache-tomcat-8.5.82.tar.gz"
+
+# apache2 vars
+apache_package: apache2
+apache_service: apache2
+php_package: libapache2-mod-php

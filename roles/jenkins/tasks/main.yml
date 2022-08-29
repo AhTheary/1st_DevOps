@@ -30,6 +30,13 @@
     enabled: true
     state: started
 
+- name: unarchive apache-maven file
+  ansible.builtin.unarchive:
+    src: "{{ maven }}"
+    dest: "/opt/"
+    remote_src: yes
+    validate_certs: true
+ 
 - name: Adding JAVA path in the bashrc files
   lineinfile: 
     dest: /root/.bashrc 

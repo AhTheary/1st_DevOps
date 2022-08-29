@@ -1,0 +1,23 @@
+---
+# tasks file for base
+
+- name: create devops user
+  user:
+    name: devops
+    shell: /bin/bash
+    groups: root
+    state: present
+
+- name: add ssh key for devops user
+  authorized_key:
+    user: devops
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJ+PpYhi76jhNtSugPJqNefZ24Ag/mgMEIfMC2TbGWQAioiYn8AsK19onB2qsP2d6OLeAPmP0PE1bnYTjK3JqHZoOk9eiYG81iDh/Md82I4orYHCxUaFska33e+dBUlGqKmaN6n6emWteCqcdUGxZVzG1MCKAJ2MNMA+qQZoEvWlqzlRmW2VRZgLAHyblMLPZTbQOaJOOitJp2sIJl0HNR6+mEzFu8+5Wfog+TSRYPdBa7S7n176Fnt3S5bhNvBFXSF7IqBDrYrEljrl/yltdXMbvjcpy13LKOQ3Yjtk9vbt94bOyB6ah1cGjdyuL/GxbSOxXBePkAqA0e+UG5Cxb0h6qbFbrdbF31e3mgwDr9GpIoJzrYnMeUaitnilRo8TtmYhPEKtpbfGwbbv9usO8ShG7pkdko0TSJMx3R+JrN/Vd5F9Qi9h/8iAongZGIeeOFOsKs/rmrnRRqMxAdG+ZjzfJTNZs4XwRrsgB0JxdEMc9WHY2LT1KyLXx5ri5pPO0= ansible devops"
+
+- name: add sudoers file for devops user
+  tags: always
+  copy:
+    src: sudoer_devops
+    dest: /etc/sudoers.d/devops
+    owner: root
+    group: root
+    mode: 0644

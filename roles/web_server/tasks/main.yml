@@ -22,8 +22,19 @@
     validate_certs: true
     extra_opts: [--strip-components=1]
 
+- name: Install java
+  apt:
+    name: openjdk-11-jdk
+    state: present
 
-#    validate_certs: true
+- name: Adding JAVA path in the bashrc files
+  lineinfile:
+    dest: /root/.bashrc
+    line: 'export PATH=$PATH:/lib/jvm/java-11-openjdk-amd64/bin'
+    insertafter: 'EOF'
+    regexp: 'export PATH=\$PATH:/lib/jvm/java-11-openjdk-amd64/bin'
+    state: present
+
 
 - name: create directory /etc/systemd/system/tomcat.service
   file:
@@ -64,12 +75,18 @@
 #    replace: '<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
 #      allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->'
 
-- name: make sure tomcat service is running and up
+- name: Make sure a service is running
   ansible.builtin.systemd:
     state: started
-    enabled: yes
-    daemon_reload: true
+    enabled: true
     name: tomcat.service
+
+- name: Start and enable Tomcat service
+  systemd:
+    name: tomcat
+    state: started
+    enabled: true
+    daemon_reload: true
 
 #- name: add role user into tomcat-users.xml
 #  ansible.builtin.lineinfile:
@@ -93,9 +110,6 @@
 #    enabled: yes
 #    daemon_reload: true
 #    name: tomcat.service   
-- name: update
-  apt:
-    update_cache: true
 
 - name: install apache and php packages
   tags: apache,httpd,php

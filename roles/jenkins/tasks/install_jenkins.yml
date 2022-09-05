@@ -1,0 +1,28 @@
+---
+# tasks file for jenkins
+
+- name: add jenkins key from url to this system
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+
+- name: add jenkins apt repository entry
+  apt_repository: repo='deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/' state=present
+
+- name: update
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: Install jenkins
+  apt:
+    name: jenkins
+    state: latest
+
+- name: Start jenkins
+  service:
+    name: jenkins
+    enabled: true
+    state: started
+
+

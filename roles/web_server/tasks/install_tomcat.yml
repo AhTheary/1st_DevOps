@@ -1,0 +1,88 @@
+---
+
+- name: create /opt/tomcat directory
+  file:
+    path: /opt/tomcat
+    state: directory
+    mode: 0755
+#- name: extractor presents
+#  ansible.builtin.yum:
+#    name:
+#      - unzip
+#      - tar
+#    state: present
+
+- name: unarchive apache-tomcat file
+  ansible.builtin.unarchive:
+    src: "{{ tomcat }}"
+    dest: "/opt/tomcat"
+    remote_src: yes
+    validate_certs: true
+    extra_opts: [--strip-components=1]
+
+- name: create directory /etc/systemd/system/tomcat.service
+  file:
+    path: /etc/systemd/system/tomcat.service
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+
+- name: Add config to directory /etc/systemd/system/tomcat.service
+  ansible.builtin.blockinfile:
+    dest: /etc/systemd/system/tomcat.service
+    state: present
+    block: |
+      [Unit]
+      Description=Tomcat9
+      After=network.target
+
+      [Service]
+      Type=forking
+
+      Environment=CATALINA_PID=/opt/tomcat/tomcat9.pid
+      #Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+      Environment=CATALINA_HOME=/opt/tomcat
+      Environment=CATALINA_BASE=/opt/tomcat
+      Environment="CATALINA_OPTS=-Xms512m -Xmx512m"    # optional
+      Environment="JAVA_OPTS=-Dfile.encoding=UTF-8"    # optional
+      ExecStart=/opt/tomcat/bin/startup.sh
+      ExecStop=/opt/tomcat/bin/shutdown.sh
+
+      [Install]
+      WantedBy=multi-user.target
+
+#- name: commenting a line in /opt/tomcat/webapps/host-manager/META-INF/context.xml
+#  replace:
+#    path: /opt/tomcat/webapps/host-manager/META-INF/context.xml
+#    regexp: '<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+#      allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />'
+#    replace: '<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+#      allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->'
+
+- name: Make sure a service is running
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: tomcat.service
+
+- name: Start and enable Tomcat service
+  systemd:
+    name: tomcat
+    state: started
+    enabled: true
+    daemon_reload: true
+
+#- name: add role user into tomcat-users.xml
+#  ansible.builtin.lineinfile:
+#    path: /opt/tomcat/conf/tomcat-users.xml
+#    regexp: '^</tomcat-users>'
+#    line: |
+#        <role rolename="manager-gui"/>
+#        <role rolename="manager-script"/>
+#        <role rolename="manager-jmx"/>
+#        <role rolename="manager-status"/>
+#        <user username="admin" password="admin" roles="manager-gui,manager-script,m>
+#        <user username="deployer" password="deployer" roles="manager-script"/>
+#        <user username="tomcat" password="s3cret" roles="manager-gui"/>
+#        </tomcat-users>
+#    state: present

@@ -1,0 +1,5 @@
+---
+# tasks file for roles/common
+include: install_java
+include: install_maven
+

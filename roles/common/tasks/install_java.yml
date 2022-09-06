@@ -4,12 +4,14 @@
   apt:
     name: openjdk-11-jdk
     state: present
+  tags: java, install, openjdk
 
 - name: Adding JAVA path in the bashrc files
   lineinfile:
+#  tags: path, java
     dest: /root/.bashrc
-    line: 'export PATH=$PATH:/lib/jvm/java-11-openjdk-amd64/bin'
+    line: 'export PATH=$PATH:{{ java_path  }}'
     insertafter: 'EOF'
-    regexp: 'export PATH=\$PATH:/lib/jvm/java-11-openjdk-amd64/bin'
+    regexp: 'export PATH=$PATH:{{ java_path  }}'
     state: present
-
+  tags: path, java

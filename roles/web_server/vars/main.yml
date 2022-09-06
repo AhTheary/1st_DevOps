@@ -3,6 +3,7 @@
 
 # tomcat vars
 tomcat: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.82/bin/apache-tomcat-8.5.82.tar.gz"
+tomcat_dest: /opt/tomcat
 
 # apache2 vars
 apache_package: apache2

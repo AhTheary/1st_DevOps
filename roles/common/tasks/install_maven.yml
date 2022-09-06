@@ -5,13 +5,16 @@
     dest: "/opt/"
     remote_src: yes
     validate_certs: true
+  tags: maven
 
 - name: Adding MAVEN path in the bashrc files
   lineinfile:
+#  tags: path, maven
     dest: /root/.bashrc
-    line: 'export PATH=$PATH:/opt/apache-maven-3.1.1/bin'
+    line: 'export PATH=$PATH:{{ maven_path }}'
     insertafter: 'EOF'
-    regexp: 'export PATH=\$PATH:/opt/apache-maven-3.1.1/bin'
+    regexp: 'export PATH=$PATH:{{ maven_path }}'
     state: present
+  tags: path, maven
 
 

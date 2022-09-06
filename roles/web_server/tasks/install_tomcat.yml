@@ -2,9 +2,10 @@
 
 - name: create /opt/tomcat directory
   file:
-    path: /opt/tomcat
+    path: "{{ tomcat_dest }}"
     state: directory
     mode: 0755
+  tags: tomcat
 #- name: extractor presents
 #  ansible.builtin.yum:
 #    name:
@@ -15,10 +16,11 @@
 - name: unarchive apache-tomcat file
   ansible.builtin.unarchive:
     src: "{{ tomcat }}"
-    dest: "/opt/tomcat"
+    dest: "{{ tomcat_dest }}"
     remote_src: yes
     validate_certs: true
     extra_opts: [--strip-components=1]
+  tags: tomcat
 
 - name: create directory /etc/systemd/system/tomcat.service
   file:
@@ -26,8 +28,10 @@
     state: touch
     modification_time: preserve
     access_time: preserve
+  tags: tomcat
 
 - name: Add config to directory /etc/systemd/system/tomcat.service
+  tags: tomcat
   ansible.builtin.blockinfile:
     dest: /etc/systemd/system/tomcat.service
     state: present
@@ -60,12 +64,14 @@
 #      allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->'
 
 - name: Make sure a service is running
+  tags: always
   ansible.builtin.systemd:
     state: started
     enabled: true
     name: tomcat.service
 
 - name: Start and enable Tomcat service
+  tags: always
   systemd:
     name: tomcat
     state: started

@@ -2,5 +2,6 @@
 # vars file for jenkins
 
 
-#maven: "https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz"
-
+jenkins_url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+jenkins_url_dest: /usr/share/keyrings/jenkins-keyring.asc
+jenkins_repo: deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/

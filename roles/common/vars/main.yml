@@ -2,6 +2,6 @@
 # vars file for roles/common
 
 
-maven: "https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin>
-
-
+maven: "https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz"
+maven_path: /opt/apache-maven-3.8.6/bin
+java_path: /lib/jvm/java-11-openjdk-amd64

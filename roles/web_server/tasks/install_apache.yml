@@ -14,3 +14,5 @@
     name: "{{ apache_service }}"
     state: started
     enabled: yes
+  notify:
+      - Restart apache

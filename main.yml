@@ -1,2 +1,17 @@
 ---
 
+  - hosts: all
+    become: true
+    roles:
+      - common
+
+  - hosts: jenkins
+    become: true
+    roles:
+      - jenkins
+
+  - hosts: web_server
+    become: true
+    roles:
+      - web_server
+

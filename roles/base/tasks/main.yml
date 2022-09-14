@@ -3,21 +3,21 @@
 
 - name: create devops user
   user:
-    name: devops
+    name: ubuntu
     shell: /bin/bash
     groups: root
     state: present
 
 - name: add ssh key for devops user
   authorized_key:
-    user: devops
-    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJ+PpYhi76jhNtSugPJqNefZ24Ag/mgMEIfMC2TbGWQAioiYn8AsK19onB2qsP2d6OLeAPmP0PE1bnYTjK3JqHZoOk9eiYG81iDh/Md82I4orYHCxUaFska33e+dBUlGqKmaN6n6emWteCqcdUGxZVzG1MCKAJ2MNMA+qQZoEvWlqzlRmW2VRZgLAHyblMLPZTbQOaJOOitJp2sIJl0HNR6+mEzFu8+5Wfog+TSRYPdBa7S7n176Fnt3S5bhNvBFXSF7IqBDrYrEljrl/yltdXMbvjcpy13LKOQ3Yjtk9vbt94bOyB6ah1cGjdyuL/GxbSOxXBePkAqA0e+UG5Cxb0h6qbFbrdbF31e3mgwDr9GpIoJzrYnMeUaitnilRo8TtmYhPEKtpbfGwbbv9usO8ShG7pkdko0TSJMx3R+JrN/Vd5F9Qi9h/8iAongZGIeeOFOsKs/rmrnRRqMxAdG+ZjzfJTNZs4XwRrsgB0JxdEMc9WHY2LT1KyLXx5ri5pPO0= ansible devops"
+    user: ubuntu
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxzct3qtFioczR6CshKFrnubshtSVCCFCXKonq89+iKreo7llwX900UzX8HbVjX7sYM5MrfDjxEjqIpgh5+bXejXh4dK+Xv9N5EchrlJwz/6YjMeDXoRChG3lAcSJ5qGUT7LD/7MDTri6aPoruGsfdpha5nAPyC+CtnqCrTHZSUC/4K4OL08JsXwgqPSgu/eg8ykptBvQ40uFmtjrhkDgOJe/ZVKAdXBHxFzG/fiUBE1V32fwVnPrnIjVoQBUf0oFG9hcACcpBLfPnbuoO9HeK0uOBQmn2PWJlQtXmQu3dWKE/YkEmklZy6ARykqqwsexswDnO4A7g93zxrrAjGpGiUxVTaEkTQ0Hz/3qaLLUwCEWjWTyShTA7oh3zI6XUxonBKO9NzymJpPXvsDPS/HiS9W4GuFYs51YQX4UbADQho00fuK0hy0b6TXktXcPewXj4iY+zkN32vwHu0gI7WuIy9XZR9dGsT2yleGlNW6M7CBQLhXgvNz32HDk6edoUc1s= ansible key"
 
 - name: add sudoers file for devops user
   tags: always
   copy:
-    src: sudoer_devops
-    dest: /etc/sudoers.d/devops
+    src: sudoer_ubuntu
+    dest: /etc/sudoers.d/ubuntu
     owner: root
     group: root
     mode: 0644

@@ -2,16 +2,32 @@
 
   - hosts: all
     become: true
+    tags: common
     roles:
       - common
 
   - hosts: jenkins
     become: true
+    tags: jenkins
     roles:
       - jenkins
 
   - hosts: web_server
     become: true
+    tags: web_server
     roles:
       - web_server
+
+  - hosts: docker
+    become: true
+    tags: docker
+    roles:
+      - docker
+
+
+  - hosts: all
+    become: true
+    tags: base
+    roles:
+      - base
 

@@ -156,6 +156,78 @@ jenkins pipline script
 
         }
     }
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+    pipeline {
+        environment {
+            registry = "theay003/devops"
+            registryCredential = 'dockerhub_id'
+            dockerImage = ''
+        }
+
+        agent any
+
+        tools {
+          nodejs 'node'
+        }
+
+        stages {
+
+            stage('Cloning Git') {
+                steps {
+                    git 'https://github.com/AhTheary/Travel-Advisor.git'
+
+                }
+            }
+
+            stage('Build') {
+                steps {
+                    sh 'npm install'
+                }
+            }
+
+            stage('Test') {
+                steps {
+                    sh 'npm test'
+                }
+            }
+
+            stage('Building image') {
+                steps{
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
+                }
+            }
+
+            stage('Deploy Image') {
+                steps{
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
+                    }
+                }
+            }
+            stage('docker stop container') {
+            steps {
+                sh 'docker ps -f name=mywebContainer -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=mywebContainer -q | xargs -r docker container rm'
+            }
+        }
+
+            // Running Docker container, make sure port 8096 is opened in 
+            stage('Docker Run') {
+                steps{
+                    script {
+                        dockerImage.run("-p 3000:3000 --rm --name mywebContainer")
+                    }
+                }
+            }
+        }
+    }
 
 
 

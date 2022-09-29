@@ -102,8 +102,9 @@ click manager app to login user:
 //////////////////////////////////////////////////////////////////////////////////////
 jenkins pipline script
 //////////////////////////
-pipeline {
-    agent any
+
+    pipeline {
+        agent any
     
     environment {
        
@@ -153,8 +154,8 @@ pipeline {
         }
   
 
+        }
     }
-}
 
-  
+
 

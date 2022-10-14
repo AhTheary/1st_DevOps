@@ -4,14 +4,14 @@
     apt: name=nginx update_cache=yes
 
   - name: copy nginx config file
-   copy: src=files/nginx.conf dest="/etc/nginx/sites-available/default"
+    copy: src=files/nginx.conf dest="/etc/nginx/sites-available/default"
 
   - name: enable configuration
-   file: >
+    file: >
      dest=/etc/nginx/sites-enabled/default
      src=/etc/nginx/sites-available/default
      state=link
 
   - name: copy index.html
-   template: src=templates/index.html.j2
+    template: src=templates/index.html.j2
              dest=/usr/share/nginx/html/index.html mode=0644

@@ -1,15 +1,19 @@
 ---
 # tasks file for nodejs
-- name: Install curl
-  apt:
-    name: curl
-    state: present
+  - name: Install curl
+    apt:
+      name: curl
+      state: present
 
-- name: add nodejs repository 
-  state: present
-  update_cache: yes
-  shell: |
-    curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - 
+#  - name: Install the nodejs
+#    apt:
+#      name: nodejs
+#      state: present
+
+
+  - name: install node 
+    shell: |
+      uri -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs
     
     
 

@@ -12,9 +12,5 @@
     curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - 
     
     
-- name: install nodejs
-  apt:
-    name: nodejs
-    state: present
-      
+
       

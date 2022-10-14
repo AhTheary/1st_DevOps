@@ -4,7 +4,7 @@
     apt: name=nginx update_cache=yes
 
   - name: copy nginx config file
-   copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
+   copy: src=files/nginx.conf dest="/etc/nginx/sites-available/default"
 
   - name: enable configuration
    file: >

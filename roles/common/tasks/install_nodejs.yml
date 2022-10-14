@@ -5,17 +5,12 @@
       name: curl
       state: present
 
-#  - name: Install the nodejs
-#    apt:
-#      name: nodejs
-#      state: present
-
-
   - name: add nodejs repository 
-    shell: |
-      curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - 
     state: present
     update_cache: yes
+    shell: |
+      curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - 
+    
     
   - name: install nodejs
     apt:

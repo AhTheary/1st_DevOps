@@ -1,16 +1,17 @@
 ---
-# tasks file for nodejs
-  - name: Install curl
-    apt:
-      name: curl
-      state: present
+# tasks file for nginx
+  - name: install nginx
+    apt: name=nginx update_cache=yes
 
-#  - name: Install the nodejs
-#    apt:
-#      name: nodejs
-#      state: present
+#  - name: copy nginx config file
+#    copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
 
+#  - name: enable configuration
+#    file: >
+#      dest=/etc/nginx/sites-enabled/default
+#      src=/etc/nginx/sites-available/default
+#      state=link
 
-  - name: install node 
-    shell: |
-      uri -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs
+#  - name: copy index.html
+#    template: src=templates/index.html.j2
+#              dest=/usr/share/nginx/html/index.html mode=0644

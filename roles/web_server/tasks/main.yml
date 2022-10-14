@@ -1,5 +1,5 @@
 ---
 
 - include: install_apache.yml
-
+- include: install_nginx.yml
 - include: install_tomcat.yml

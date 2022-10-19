@@ -1,0 +1,25 @@
+---
+# tasks file for nodejs
+  - name: Install curl
+    tags: gitlab
+    apt:
+      name: curl
+      state: present
+
+  - name: install node 
+    shell: |
+      curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
+    
+  - name: Install the nodejs
+    tags: gitlab
+    apt:
+      name: gitlab-runner
+      state: present
+
+  - name: start and enable apache service
+    tags: gitlab
+    service:
+      name: gitlab-runner
+      state: started
+      enabled: yes
+      

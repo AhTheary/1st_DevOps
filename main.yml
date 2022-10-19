@@ -6,11 +6,11 @@
     roles:
       - common
 
-  - hosts: jenkins
+  - hosts: docker
     become: true
-    tags: jenkins
+    tags: gitlab
     roles:
-      - jenkins
+      - gitlab
 
   - hosts: web_server
     become: true

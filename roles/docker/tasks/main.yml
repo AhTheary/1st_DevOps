@@ -40,3 +40,16 @@
   pip:
     name: docker
 
+- name: adding ubuntu into docker (for use without sudo)
+  user:
+    name: "ubuntu"
+    append: yes
+    groups: docker
+
+- name: adding gitlab-runner into docker 
+  user:
+    name: "gitlab-runner"
+    append: yes
+    groups: docker
+
+

@@ -1,2 +1,5 @@
 ---
 # vars file for roles/docker
+docker_users:
+  - 'ubuntu'
+  - 'gitlab-runner'

@@ -1,33 +1,37 @@
 ---
-
-  - hosts: all
-    become: true
-    tags: common
-    roles:
-      - common
-
   - hosts: docker
     become: true
-    tags: gitlab
+    
     roles:
-      - gitlab
+      - role: gitlab-runner
+        tags: gitlab-runner
+      - role: docker
+        tags: docker
 
-  - hosts: web_server
-    become: true
-    tags: web_server
-    roles:
-      - web_server
-
-  - hosts: docker
-    become: true
-    tags: docker
-    roles:
-      - docker
+# - hosts: all
+#   tasks:
+#     - name: reboot host(s)
+#       ansible.builtin.reboot:
+#         msg: "reboot by Ansible"
+#         pre_reboot_delay: 5
+#         post_reboot_delay: 10
+#         test_command: "whoami"
 
 
-#   - hosts: all
-#     become: true
-#     tags: base
-#     roles:
-#       - base
 
+
+
+
+
+
+  # - hosts: web_server
+  #   become: true
+  #   tags: web_server
+  #   roles:
+  #     - web_server
+
+  # - hosts: all
+  #   become: true
+  #   tags: common
+  #   roles:
+  #     - common

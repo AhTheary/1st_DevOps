@@ -1,25 +1,32 @@
 ---
 # tasks file for nodejs
   - name: Install curl
-    tags: gitlab
+    tags: gitlab-runner
     apt:
       name: curl
       state: present
 
-  - name: install node 
+  - name: add repositories gitlab-runner
     shell: |
       curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
     
-  - name: Install the nodejs
-    tags: gitlab
+  - name: Install the gitlab-runner
+    tags: gitlab-runner
     apt:
       name: gitlab-runner
       state: present
 
-  - name: start and enable apache service
+  - name: start and enable gitlab-runner
     tags: gitlab
     service:
       name: gitlab-runner
       state: started
       enabled: yes
       
+- name: Allow the bob user to run any commands as alice with sudo -u alice
+  community.general.sudoers:
+    name: gitlab-runner run as root
+    state: present
+    user: gitlab-runner
+    runas: root
+    commands: ALL

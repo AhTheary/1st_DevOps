@@ -16,8 +16,8 @@
 - name: update
   tags: jenkins
   apt:
-    update_cache: yes
     state: latest
+    update_cache: yes
 
 - name: Install jenkins
   tags: jenkins

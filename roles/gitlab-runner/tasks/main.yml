@@ -23,10 +23,10 @@
       state: started
       enabled: yes
       
-- name: Allow the bob user to run any commands as alice with sudo -u alice
-  community.general.sudoers:
-    name: gitlab-runner run as root
-    state: present
-    user: gitlab-runner
-    runas: root
-    commands: ALL
+  - name: Allow the bob user to run any commands as alice with sudo -u alice
+    community.general.sudoers:
+      name: gitlab-runner run as root
+      state: present
+      user: gitlab-runner
+      runas: root
+      commands: ALL

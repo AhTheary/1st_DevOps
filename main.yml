@@ -5,8 +5,8 @@
     roles:
       - role: common
         tags: common
-      - role: gitlab-runner
-        tags: gitlab-runner
+      - role: jenkins
+        tags: jenkins
 
 # - hosts: all
 #   tasks:

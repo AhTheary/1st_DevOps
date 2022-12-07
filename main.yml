@@ -3,10 +3,10 @@
     become: true
     
     roles:
+      - role: common
+        tags: common
       - role: gitlab-runner
         tags: gitlab-runner
-      - role: docker
-        tags: docker
 
 # - hosts: all
 #   tasks:

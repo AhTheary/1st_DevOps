@@ -1,4 +1,3 @@
 [docker]
 
-172.31.90.203 
-172.31.95.23      #IP frontend server
+user01 ansible_connection=ssh ansible_user=root ansible_host=139.59.98.14
